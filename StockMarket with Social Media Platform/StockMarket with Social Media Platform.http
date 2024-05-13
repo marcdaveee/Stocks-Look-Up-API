@@ -1,0 +1,6 @@
+@StockMarket_with_Social_Media_Platform_HostAddress = http://localhost:5196
+
+GET {{StockMarket_with_Social_Media_Platform_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
