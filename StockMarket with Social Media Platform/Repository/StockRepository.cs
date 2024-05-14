@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using StockMarket_with_Social_Media_Platform.Data;
+using StockMarket_with_Social_Media_Platform.Dtos.Comment;
 using StockMarket_with_Social_Media_Platform.Dtos.Stock;
 using StockMarket_with_Social_Media_Platform.Interfaces;
 using StockMarket_with_Social_Media_Platform.Mappers;
@@ -19,14 +20,14 @@ namespace StockMarket_with_Social_Media_Platform.Repository
 
         public async Task<IEnumerable<Stock>> GetStocksAsync()
         {
-            var stocks  = await _context.Stocks.ToListAsync();
+            var stocks  = await _context.Stocks.Include(stock => stock.Comments).ToListAsync();
 
             return stocks;
         }
 
         public async Task<Stock?> GetStockByIdAsync(int id)
         {
-            return await _context.Stocks.FirstOrDefaultAsync(s => s.Id == id);           
+            return await _context.Stocks.Include(stock => stock.Comments).FirstOrDefaultAsync(s => s.Id == id);           
         }
 
         public async Task <Stock> CreateStockAsync (Stock stockModel)
@@ -74,6 +75,11 @@ namespace StockMarket_with_Social_Media_Platform.Repository
             return stockModel;
 
             
+        }
+
+        public async Task<bool> isStockExistAsync(int id)
+        {
+            return await _context.Stocks.AnyAsync(s => s.Id == id);
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace StockMarket_with_Social_Media_Platform.Models
+﻿namespace StockMarket_with_Social_Media_Platform.Dtos.Comment
 {
-    public class Comment
+    public class CommentDto
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
@@ -9,8 +9,6 @@
         public DateTime CreatedOn { get; set; } = DateTime.Now;
 
         public int StockId { get; set; }
-
-        public Stock Stock { get; set; }
 
     }
 }

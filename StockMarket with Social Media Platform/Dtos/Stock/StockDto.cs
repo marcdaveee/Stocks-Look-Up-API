@@ -1,5 +1,5 @@
-﻿using StockMarket_with_Social_Media_Platform.Models;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using StockMarket_with_Social_Media_Platform.Dtos.Comment;
 
 namespace StockMarket_with_Social_Media_Platform.Dtos.Stock
 {
@@ -15,6 +15,6 @@ namespace StockMarket_with_Social_Media_Platform.Dtos.Stock
         public decimal LastDiv { get; set; }
         public string Industry { get; set; } = string.Empty;
         public long MarketCap { get; set; }
-        
+        public List<CommentDto> Comments { get; set; } = new List<CommentDto>();
     }
 }

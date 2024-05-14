@@ -13,7 +13,8 @@ namespace StockMarket_with_Social_Media_Platform.Interfaces
 
         Task <Stock?>UpdateStockAsync (int id, UpdateStockRequestDto updatedStock);
 
-
         Task <Stock?> RemoveStockAsync(int id);
+
+        Task<bool> isStockExistAsync(int id);
     }
 }
