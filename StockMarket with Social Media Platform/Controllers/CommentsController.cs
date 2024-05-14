@@ -68,5 +68,21 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
 
             return CreatedAtAction(nameof(GetCommentById), new { commentId = commentModel.Id }, commentModel.toCommentDto());
         }
+
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateComment([FromRoute] int id, [FromBody] UpdateCommentRequestDto updatedComment)
+        {
+            var commentModel = await _commentRepo.UpdateCommentAsync(id, updatedComment.toCommentFromUpdateDto());
+
+            if(commentModel == null)
+            {   
+                return NotFound("Comment Not Found");
+            }
+
+            return Ok(commentModel.toCommentDto());
+        }
     }
+
 }

@@ -26,5 +26,14 @@ namespace StockMarket_with_Social_Media_Platform.Mappers
                 StockId = stockId,
             };
         }
+
+        public static Comment toCommentFromUpdateDto(this UpdateCommentRequestDto updatedComment)
+        {
+            return new Comment
+            {
+                Title = updatedComment.Title,
+                Content = updatedComment.Content,                
+            };
+        }
     }
 }

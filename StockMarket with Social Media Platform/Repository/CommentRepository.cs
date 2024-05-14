@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StockMarket_with_Social_Media_Platform.Data;
+using StockMarket_with_Social_Media_Platform.Dtos.Comment;
 using StockMarket_with_Social_Media_Platform.Interfaces;
 using StockMarket_with_Social_Media_Platform.Models;
 
@@ -37,6 +38,23 @@ namespace StockMarket_with_Social_Media_Platform.Repository
             await _context.SaveChangesAsync();
 
             return commentModel;
-        } 
+        }
+
+        public async Task<Comment?> UpdateCommentAsync(int id, Comment commentModel)
+        {
+            var existingComment = await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
+
+            if(existingComment == null)
+            {
+                return null;
+            }
+
+            existingComment.Title = commentModel.Title;
+            existingComment.Content = commentModel.Content;
+
+            await _context.SaveChangesAsync();
+
+            return existingComment;
+        }
     }
 }
