@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using StockMarket_with_Social_Media_Platform.Data;
+using StockMarket_with_Social_Media_Platform.Interfaces;
+using StockMarket_with_Social_Media_Platform.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IStockRepository, StockRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
 var app = builder.Build();
 
