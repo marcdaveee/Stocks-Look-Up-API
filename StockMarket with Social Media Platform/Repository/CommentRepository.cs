@@ -40,7 +40,7 @@ namespace StockMarket_with_Social_Media_Platform.Repository
             return commentModel;
         }
 
-        public async Task<Comment?> UpdateCommentAsync(int id, Comment commentModel)
+        public async Task<Comment?> UpdateCommentAsync(int id, UpdateCommentRequestDto updatedComment)
         {
             var existingComment = await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
 
@@ -49,12 +49,27 @@ namespace StockMarket_with_Social_Media_Platform.Repository
                 return null;
             }
 
-            existingComment.Title = commentModel.Title;
-            existingComment.Content = commentModel.Content;
+            existingComment.Title = updatedComment.Title;
+            existingComment.Content = updatedComment.Content;
 
             await _context.SaveChangesAsync();
 
             return existingComment;
+        }
+
+        public async Task<Comment?> DeleteCommentAsync(int id)
+        {
+            var commentModel = await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
+
+            if (commentModel == null)
+            {
+                return null;
+            }
+
+            _context.Comments.Remove(commentModel);
+            await _context.SaveChangesAsync();
+
+            return commentModel;
         }
     }
 }

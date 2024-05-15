@@ -60,7 +60,7 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
         {
             if(!await _stockRepo.isStockExistAsync(stockId))
             {
-                return BadRequest("Stock Does Not exist");
+                return BadRequest("Stock does not exist");
             }
             var commentModel = createdComment.toCommentFromCreateDto(stockId);
                 
@@ -74,7 +74,7 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
         [Route("{id}")]
         public async Task<IActionResult> UpdateComment([FromRoute] int id, [FromBody] UpdateCommentRequestDto updatedComment)
         {
-            var commentModel = await _commentRepo.UpdateCommentAsync(id, updatedComment.toCommentFromUpdateDto());
+            var commentModel = await _commentRepo.UpdateCommentAsync(id, updatedComment);
 
             if(commentModel == null)
             {   
@@ -82,6 +82,20 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
             }
 
             return Ok(commentModel.toCommentDto());
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteComment([FromRoute] int id)
+        {
+            var commentModel = await _commentRepo.DeleteCommentAsync(id);
+
+            if(commentModel == null)
+            {
+                return NotFound("Comment does not exist");
+            }
+
+            return NoContent();
         }
     }
 

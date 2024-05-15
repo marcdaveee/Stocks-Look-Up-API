@@ -11,6 +11,8 @@ namespace StockMarket_with_Social_Media_Platform.Interfaces
 
         Task<Comment> CreateCommentAsync(Comment commentModel);
 
-        Task<Comment?> UpdateCommentAsync(int id, Comment commentModel);
+        Task<Comment?> UpdateCommentAsync(int id, UpdateCommentRequestDto updatedComment);
+
+        Task<Comment?> DeleteCommentAsync(int id);
     }
 }
