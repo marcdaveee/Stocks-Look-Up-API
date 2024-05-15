@@ -38,7 +38,7 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
         }
 
         [HttpGet]
-        [Route("{commentId}")]
+        [Route("{commentId:int}")]
 
         public async Task <IActionResult> GetCommentById([FromRoute] int commentId)
         {
@@ -55,7 +55,7 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
 
 
         [HttpPost]
-        [Route("{stockId}")]
+        [Route("{stockId:int}")]
         public async Task<IActionResult> CreateCommentAsync([FromRoute] int stockId, [FromBody] CreateCommentRequestDto createdComment )
         {
             if(!await _stockRepo.isStockExistAsync(stockId))
@@ -71,7 +71,7 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
 
 
         [HttpPut]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> UpdateComment([FromRoute] int id, [FromBody] UpdateCommentRequestDto updatedComment)
         {
             var commentModel = await _commentRepo.UpdateCommentAsync(id, updatedComment);
@@ -85,7 +85,7 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> DeleteComment([FromRoute] int id)
         {
             var commentModel = await _commentRepo.DeleteCommentAsync(id);

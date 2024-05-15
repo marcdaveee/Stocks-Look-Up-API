@@ -30,7 +30,7 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
             return Ok(stockDtos);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task <IActionResult> GetStockById([FromRoute] int id)
         {
             var stock = await _stockRepo.GetStockByIdAsync(id);
@@ -51,7 +51,7 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
             return CreatedAtAction(nameof(GetStockById), new { id = stockModel.Id }, stockModel.ToStockDto());
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task <IActionResult> UpdateStock([FromRoute] int id, [FromBody] UpdateStockRequestDto updatedStock)
         {
             var stockModel = await _stockRepo.UpdateStockAsync(id, updatedStock);
@@ -65,7 +65,7 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
         }
 
         [HttpDelete]
-        [Route("{stockId}")]
+        [Route("{stockId:int}")]
 
         public async Task<IActionResult> DeleteStock([FromRoute] int stockId)
         {
