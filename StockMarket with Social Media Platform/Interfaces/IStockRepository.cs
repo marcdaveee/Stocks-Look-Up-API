@@ -1,11 +1,12 @@
 ﻿using StockMarket_with_Social_Media_Platform.Dtos.Stock;
+using StockMarket_with_Social_Media_Platform.Helpers;
 using StockMarket_with_Social_Media_Platform.Models;
 
 namespace StockMarket_with_Social_Media_Platform.Interfaces
 {
     public interface IStockRepository
     {
-        Task<IEnumerable<Stock>> GetStocksAsync();
+        Task<IEnumerable<Stock>> GetStocksAsync(QueryObject query);
 
         Task<Stock?> GetStockByIdAsync(int id);
 

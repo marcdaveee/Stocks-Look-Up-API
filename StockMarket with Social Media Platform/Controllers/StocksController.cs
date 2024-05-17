@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StockMarket_with_Social_Media_Platform.Data;
 using StockMarket_with_Social_Media_Platform.Dtos.Stock;
+using StockMarket_with_Social_Media_Platform.Helpers;
 using StockMarket_with_Social_Media_Platform.Interfaces;
 using StockMarket_with_Social_Media_Platform.Mappers;
 using StockMarket_with_Social_Media_Platform.Models;
@@ -23,9 +24,9 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult <IEnumerable<StockDto>>> GetStocks()
+        public async Task<ActionResult <IEnumerable<StockDto>>> GetStocks([FromQuery] QueryObject query)
         {
-            var stocks = await _stockRepo.GetStocksAsync();
+            var stocks = await _stockRepo.GetStocksAsync(query);
             var stockDtos = stocks.Select(s => s.ToStockDto());
             return Ok(stockDtos);
         }
@@ -45,6 +46,7 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
 
         public async Task<IActionResult> CreateStock([FromBody] CreateStockRequestDto createdStock)
         {
+
             var stockModel = createdStock.toStockFromCreateDto();
              await _stockRepo.CreateStockAsync(stockModel);
 

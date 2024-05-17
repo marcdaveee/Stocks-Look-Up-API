@@ -10,7 +10,7 @@
 
         public int StockId { get; set; }
 
-        public Stock Stock { get; set; }
+        public Stock? Stock { get; set; }
 
     }
 }
