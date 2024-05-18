@@ -18,7 +18,7 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
         }
 
         [HttpPost]
-        [Route("{register}")]
+        [Route("register")]
         public async Task<IActionResult> Register([FromBody]RegisterDto registerDto)
         {
             try
@@ -38,12 +38,24 @@ namespace StockMarket_with_Social_Media_Platform.Controllers
 
                 if (createdUser.Succeeded)
                 {
-                    //Apply User Role!
+                    var roleResult = await _userManager.AddToRoleAsync(appUser, "User");
+                    if (roleResult.Succeeded)
+                    {
+                        return Ok("Account Created!");
+                    }
+                    else
+                    {
+                        return BadRequest(roleResult.Errors);
+                    }
+                }
+                else
+                {
+                    return BadRequest(createdUser.Errors);
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-
+                return BadRequest(e);
             }
         }
     }
