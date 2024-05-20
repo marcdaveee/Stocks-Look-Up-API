@@ -5,7 +5,7 @@ namespace StockMarket_with_Social_Media_Platform.Models
     [Table("Portfolio")]
     public class Portfolio
     {
-        public int AppUserId { get; set; }
+        public string AppUserId { get; set; }
 
         public int StockId { get; set; }
 
