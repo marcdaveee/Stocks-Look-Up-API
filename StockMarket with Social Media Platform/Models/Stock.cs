@@ -2,6 +2,7 @@
 
 namespace StockMarket_with_Social_Media_Platform.Models
 {
+    [Table("Stocks")]
     public class Stock
     {
         public int Id { get; set; }
@@ -18,6 +19,7 @@ namespace StockMarket_with_Social_Media_Platform.Models
         public long MarketCap { get; set; }
 
         public List<Comment> Comments { get; set; } = new List<Comment>();
-        
+
+        public List<Portfolio> Portfolios { get; set; } = new List<Portfolio>();
     }
 }
